@@ -6,6 +6,7 @@ import type {
   AggregateRating,
   AggregateOffer,
   Offers,
+  ImageObject,
 } from 'src/types';
 
 import { setOffers } from 'src/utils/schema/setOffers';
@@ -14,10 +15,11 @@ import { setAggregateRating } from 'src/utils/schema/setAggregateRating';
 import { setAggregateOffer } from 'src/utils/schema/setAggregateOffer';
 import { setManufacturer } from 'src/utils/schema/setManufacturer';
 import { setBrand } from 'src/utils/schema/setBrand';
+import { setImageObject } from 'src/utils/schema/setImageObject';
 
 export interface ProductJsonLdProps extends JsonLdProps {
   productName: string;
-  images?: string[];
+  images?: string[] | ImageObject;
   description?: string;
   brand?: string;
   reviews?: Review | Review[];
@@ -58,7 +60,7 @@ function ProductJsonLd({
 }: ProductJsonLdProps) {
   const data = {
     ...rest,
-    image: images,
+    image: setImageObject(images),
     brand: setBrand(brand),
     review: setReviews(reviews),
     aggregateRating: setAggregateRating(aggregateRating),

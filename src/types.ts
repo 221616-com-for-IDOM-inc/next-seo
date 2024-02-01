@@ -456,6 +456,8 @@ export type OrganizationCategory =
   | 'WorkersUnion'
   | 'Organization';
 
+export type ImageObject = { [key: string]: string };
+
 export interface AdditionalRobotsProps {
   nosnippet?: boolean;
   maxSnippet?: number;

@@ -276,4 +276,25 @@ describe('Product JSON-LD', () => {
         });
       });
   });
+
+  it('ImageObject', () => {
+    cy.visit('http://localhost:3000/product-jsonld/imageObject');
+    cy.get('head script[type="application/ld+json"]')
+      .should('have.length', 1)
+      .then(tags => {
+        const jsonLD = JSON.parse(tags[0].innerHTML);
+        expect(jsonLD).to.deep.equal({
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: 'Executive Anvil',
+          image: {
+            '@type': 'ImageObject',
+            url: 'https://www.example.com/anvil_executive.jpg',
+            width: '800px',
+            height: '600px',
+            caption: 'Executive Anvil Image',
+          },
+        });
+      });
+  });
 });
